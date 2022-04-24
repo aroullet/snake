@@ -7,4 +7,4 @@ class Point:
     y: int
 
     def __str__(self):
-        return '\t|'
+        return '|\t'

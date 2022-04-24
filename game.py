@@ -26,9 +26,9 @@ class SnakeGame:
         for row in self.grid.array:
             for point in row:
                 if point in self.snake.position:
-                    print(' x |', end='')
+                    print('| x ', end='')
                 else:
                     print(point, end='')
-            print('\t')
-            print('----' * 11)
+            print('|')
+            print('----' * self.grid.width)
 

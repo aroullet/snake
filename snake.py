@@ -34,6 +34,7 @@ class Snake:
 
         if self._direction == Directions.UP:
             new_y += 1
+
         elif self._direction == Directions.DOWN:
             new_y -= 1
 
@@ -72,6 +73,6 @@ if __name__ == '__main__':
     print(snake)
     snake.update_position()
     print(snake)
-    snake.move_up()
+    snake.move_left()
     snake.update_position()
     print(snake)

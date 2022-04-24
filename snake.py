@@ -10,11 +10,9 @@ class Directions(Enum):
 
 
 class Snake:
-    speed = 10
 
     def __init__(self, initial_pos: list[Point]):
         self.position = initial_pos
-        self._length = len(initial_pos)
         self._direction = Directions.RIGHT
 
     def __str__(self):
@@ -24,7 +22,7 @@ class Snake:
         """
         Iterates over position array from tail to head, setting position of block i to that of block i+1
         """
-        for i in range(self._length-1):
+        for i in range(self.length-1):
             self.position[i] = self.position[i+1]
         self._update_head()
 
@@ -47,8 +45,12 @@ class Snake:
 
         self.position[-1] = Point(new_x, new_y)
 
+    @property
+    def length(self):
+        return len(self.position)
+
     def grow(self):
-        self._length += 1
+        pass
 
     def move_up(self) -> None:
         if self._direction != Directions.DOWN:

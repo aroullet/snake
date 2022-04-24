@@ -17,6 +17,8 @@ class GUI:
 
     def __init__(self, width: int, height: int, num_squares: int, square_size: int):
         pygame.init()
+        pygame.display.set_caption('Snake')
+
         self.width = width
         self.height = height
         self.square_size = square_size
@@ -30,3 +32,6 @@ class GUI:
             self.screen.blit(square.surf, (positions[i].x*self.square_size, positions[i].y*self.square_size))
         self.screen.blit(self.fruit_square.surf, (fruit.x*self.square_size, fruit.y*self.square_size))
         pygame.display.flip()
+
+    def add_new_square(self):
+        self.squares.append(Square(self.square_size))

@@ -1,11 +1,12 @@
-from snake import Snake
-from point import Point
-from gui import GUI
 import pygame
 from pygame.locals import *
 from time import sleep
 from random import randint
 from config import read_config
+
+from snake import Snake
+from point import Point
+from gui import GUI
 
 cfg = read_config('./config.json')
 
@@ -14,7 +15,7 @@ class SnakeGame:
 
     def __init__(self):
         self.snake = Snake(initial_pos=[Point(i, 20) for i in range(10)])
-        self.fruit = Point(randint(0, cfg.width)//cfg.square_size, randint(0, cfg.width)//cfg.square_size)
+        self.fruit = SnakeGame.random_fruit()
 
         self.gui = GUI(width=cfg.width, height=cfg.height, num_squares=self.snake.length, square_size=cfg.square_size)
         self.running = True
@@ -30,8 +31,15 @@ class SnakeGame:
             self.check_collision()
             sleep(cfg.refresh_delay)
 
+        pygame.display.quit()
+        pygame.quit()
+        quit(0)
+
     def check_fruit(self):
-        pass
+        if self.snake.position[-1] == self.fruit:
+            self.snake.grow()
+            self.fruit = SnakeGame.random_fruit()
+            self.gui.add_new_square()
 
     def check_out_of_bounds(self):
         for point in self.snake.position:
@@ -67,3 +75,7 @@ class SnakeGame:
 
             elif event.type == QUIT:
                 self.running = False
+
+    @staticmethod
+    def random_fruit():
+        return Point(randint(0, cfg.width)//cfg.square_size, randint(0, cfg.height)//cfg.square_size)

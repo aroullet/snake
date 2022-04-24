@@ -50,7 +50,7 @@ class Snake:
         return len(self.position)
 
     def grow(self):
-        pass
+        self.position.insert(0, Point(self.position[0].x-1, self.position[0].y))
 
     def move_up(self) -> None:
         if self._direction != Directions.DOWN:

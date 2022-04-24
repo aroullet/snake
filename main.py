@@ -1,5 +1,9 @@
+from game import SnakeGame
+
+
 def main():
-    pass
+    game = SnakeGame()
+    game.run()
 
 
 if __name__ == '__main__':

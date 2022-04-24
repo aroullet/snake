@@ -1,3 +1,10 @@
-from collections import namedtuple
+from dataclasses import dataclass
 
-Point = namedtuple('Point', ['x', 'y'])
+
+@dataclass
+class Point:
+    x: int
+    y: int
+
+    def __str__(self):
+        return '\t|'

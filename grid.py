@@ -19,9 +19,10 @@ class Grid:
 
     def print_grid(self):
         for row in self.array:
-            print(row)
+            print([point for point in row])
+            print('----'*self._width)
 
 
 if __name__ == '__main__':
     grid = Grid(5, 5)
-    print(grid)
+    grid.print_grid()

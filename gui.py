@@ -1,7 +1,7 @@
 import pygame
 from point import Point
 
-BLOCK_SIZE = 25
+BLOCK_SIZE = 15
 
 
 class Square(pygame.sprite.Sprite):
@@ -19,9 +19,12 @@ class Square(pygame.sprite.Sprite):
 
 class GUI:
 
-    def __init__(self, num_squares):
+    def __init__(self, width, length, num_squares):
         pygame.init()
-        self.screen = pygame.display.set_mode((800, 600))
+        self.width = width
+        self.length = length
+
+        self.screen = pygame.display.set_mode((self.width, self.length ))
         self.squares = [Square() for i in range(num_squares)]
 
     def draw(self, positions: list[Point]):

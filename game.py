@@ -1,4 +1,3 @@
-from grid import Grid
 from snake import Snake
 from point import Point
 from gui import GUI
@@ -10,9 +9,8 @@ from time import sleep
 class SnakeGame:
 
     def __init__(self):
-        self.grid = Grid(10, 10)
         self.snake = Snake(initial_pos=[Point(2, 4), Point(2, 3), Point(2, 2)])
-        self.gui = GUI(self.snake.length)
+        self.gui = GUI(width=800, length=600, num_squares=self.snake.length)
         self.running = True
 
     def run(self) -> None:
@@ -21,7 +19,16 @@ class SnakeGame:
             self.check_events()
             self.gui.draw(self.snake.position)
             self.snake.update_position()
-            sleep(0.03)
+            self.check_out_of_bounds()
+            sleep(0.07)
+
+    def check_out_of_bounds(self):
+        for point in self.snake.position:
+            if point.x < 0 or point.x > self.gui.width/15:
+                self.running = False
+
+            if point.y < 0 or point.y > self.gui.length/15:
+                self.running = False
 
     def check_events(self):
         for event in pygame.event.get():

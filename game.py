@@ -26,9 +26,9 @@ class SnakeGame:
             self.check_events()
             self.gui.draw(self.snake.position, self.fruit)
             self.snake.update_position()
-            self.check_fruit()
             self.check_out_of_bounds()
             self.check_collision()
+            self.check_fruit()
             sleep(cfg.refresh_delay)
 
         pygame.display.quit()

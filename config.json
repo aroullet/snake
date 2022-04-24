@@ -1,6 +1,6 @@
 {
-  "width": 800,
-  "height": 600,
+  "width": 1200,
+  "height": 900,
   "square_size": 15,
-  "refresh_delay": 0.06
+  "refresh_delay": 0.03
 }

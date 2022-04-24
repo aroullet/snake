@@ -4,36 +4,49 @@ from gui import GUI
 import pygame
 from pygame.locals import *
 from time import sleep
+from random import randint
+from config import read_config
+
+cfg = read_config('./config.json')
 
 
 class SnakeGame:
 
     def __init__(self):
-        self.snake = Snake(initial_pos=[Point(i, 20) for i in range(15)])
-        self.gui = GUI(width=800, length=600, num_squares=self.snake.length)
+        self.snake = Snake(initial_pos=[Point(i, 20) for i in range(10)])
+        self.fruit = Point(randint(0, cfg.width)//cfg.square_size, randint(0, cfg.width)//cfg.square_size)
+
+        self.gui = GUI(width=cfg.width, height=cfg.height, num_squares=self.snake.length, square_size=cfg.square_size)
         self.running = True
 
     def run(self) -> None:
         while self.running:
             self.gui.screen.fill((0, 0, 0))  # Clear screen
             self.check_events()
-            self.gui.draw(self.snake.position)
+            self.gui.draw(self.snake.position, self.fruit)
             self.snake.update_position()
+            self.check_fruit()
             self.check_out_of_bounds()
             self.check_collision()
-            sleep(0.07)
+            sleep(cfg.refresh_delay)
+
+    def check_fruit(self):
+        pass
 
     def check_out_of_bounds(self):
         for point in self.snake.position:
-            if point.x < 0 or point.x > self.gui.width/15:
+            if point.x < 0 or point.x > cfg.width/cfg.square_size:
                 self.running = False
+                print('You ran into a wall!')
 
-            if point.y < 0 or point.y > self.gui.length/15:
+            if point.y < 0 or point.y > cfg.height/cfg.square_size:
                 self.running = False
+                print('You ran into a wall!')
 
     def check_collision(self):
         if len(set(self.snake.position)) < self.snake.length:  # Check for duplicate points in positions list
             self.running = False
+            print('You hit yourself!')
 
     def check_events(self):
         for event in pygame.event.get():
@@ -54,4 +67,3 @@ class SnakeGame:
 
             elif event.type == QUIT:
                 self.running = False
-

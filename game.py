@@ -9,7 +9,7 @@ from time import sleep
 class SnakeGame:
 
     def __init__(self):
-        self.snake = Snake(initial_pos=[Point(2, 4), Point(2, 3), Point(2, 2)])
+        self.snake = Snake(initial_pos=[Point(i, 20) for i in range(15)])
         self.gui = GUI(width=800, length=600, num_squares=self.snake.length)
         self.running = True
 
@@ -20,6 +20,7 @@ class SnakeGame:
             self.gui.draw(self.snake.position)
             self.snake.update_position()
             self.check_out_of_bounds()
+            self.check_collision()
             sleep(0.07)
 
     def check_out_of_bounds(self):
@@ -29,6 +30,10 @@ class SnakeGame:
 
             if point.y < 0 or point.y > self.gui.length/15:
                 self.running = False
+
+    def check_collision(self):
+        if len(set(self.snake.position)) < self.snake.length:  # Check for duplicate points in positions list
+            self.running = False
 
     def check_events(self):
         for event in pygame.event.get():

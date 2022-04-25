@@ -1,6 +1,5 @@
 import pygame
 from pygame.locals import *
-from time import sleep
 from random import randint
 from config import read_config
 
@@ -20,6 +19,7 @@ class SnakeGame:
 
         self.gui = GUI(width=cfg.width, height=cfg.height, num_squares=self.snake.length, square_size=cfg.square_size)
         self.running = True
+        self.clock = pygame.time.Clock()
 
     def run(self) -> None:
         while self.running:
@@ -31,7 +31,9 @@ class SnakeGame:
             self.check_out_of_bounds()
             self.check_collision()
             self.check_fruit()
-            sleep(cfg.refresh_delay)
+
+            self.clock.tick(60)  # 60 loops per second to ensure fast key events are properly handled
+            pygame.time.delay(cfg.refresh_delay)
 
         pygame.display.quit()
         pygame.quit()

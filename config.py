@@ -7,7 +7,7 @@ class GameConfig:
     width: int
     height: int
     square_size: int
-    refresh_delay: float
+    refresh_delay: int
 
 
 def read_config(config_file: str) -> GameConfig:

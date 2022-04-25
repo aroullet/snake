@@ -2,5 +2,5 @@
   "width": 1000,
   "height": 700,
   "square_size": 15,
-  "refresh_delay": 0.03
+  "refresh_delay": 30
 }

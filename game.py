@@ -40,14 +40,14 @@ class SnakeGame:
         pygame.quit()
         quit(0)
 
-    def _check_fruit(self):
+    def _check_fruit(self) -> None:
         if self.snake.position[-1] == self.fruit:
             self.snake.grow()
             self.fruit = SnakeGame._random_fruit()
             self.gui.add_new_square()
             self.score += 1
 
-    def _check_out_of_bounds(self):
+    def _check_out_of_bounds(self) -> None:
         head = self.snake.position[-1]
         if not (0 < head.x < cfg.width/cfg.square_size):
             self.running = False
@@ -57,12 +57,12 @@ class SnakeGame:
             self.running = False
             print('You ran into a wall!')
 
-    def _check_collision(self):
+    def _check_collision(self) -> None:
         if len(set(self.snake.position)) < self.snake.length:  # _check for duplicate points in positions list
             self.running = False
             print('You hit yourself!')
 
-    def _check_events(self):
+    def _check_events(self) -> None:
         for event in pygame.event.get():
 
             if event.type == KEYDOWN:
@@ -83,5 +83,5 @@ class SnakeGame:
                 self.running = False
 
     @staticmethod
-    def _random_fruit():
+    def _random_fruit() -> Point:
         return Point(randint(0, cfg.width)//cfg.square_size, randint(0, cfg.height)//cfg.square_size)

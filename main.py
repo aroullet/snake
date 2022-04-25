@@ -1,7 +1,7 @@
 from game import SnakeGame
 
 
-def main():
+def main() -> None:
     game = SnakeGame()
     game.run()
 

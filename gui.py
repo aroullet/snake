@@ -24,18 +24,18 @@ class GUI:
         self._squares = [Square(self._square_size) for i in range(num_squares)]
         self._fruit_square = Square(self._square_size)
 
-    def draw(self, positions: list[Point], fruit: Point, count: int):
+    def draw(self, positions: list[Point], fruit: Point, count: int) -> None:
         for i, square in enumerate(self._squares):
             self.screen.blit(square.surf, (positions[i].x*self._square_size, positions[i].y*self._square_size))
         self.screen.blit(self._fruit_square.surf, (fruit.x*self._square_size, fruit.y*self._square_size))
         self._display_score(count)
         pygame.display.flip()
 
-    def _display_score(self, count: int):
+    def _display_score(self, count: int) -> None:
         font = pygame.font.SysFont('Roboto', 32)
         text = font.render(f'Score: {count}', True, (255, 255, 255))
         text_rect = text.get_rect(center=(self._width/2, self._height/20))
         self.screen.blit(text, text_rect)
 
-    def add_new_square(self):
+    def add_new_square(self) -> None:
         self._squares.append(Square(self._square_size))

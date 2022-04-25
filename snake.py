@@ -11,12 +11,12 @@ class Directions(Enum):
 
 class Snake:
 
-    def __init__(self, initial_pos: list[Point] = [Point(i, 20) for i in range(10)]):
+    def __init__(self, initial_pos: list[Point] = [Point(i, 20) for i in range(5)]):
         self.position = initial_pos
         self._direction = Directions.RIGHT
         self._last_pos = None
 
-    def __str__(self):
+    def __str__(self) -> str:
         return f'{self.position}'
 
     def update_position(self) -> None:
@@ -48,10 +48,10 @@ class Snake:
         self.position[-1] = Point(new_x, new_y)
 
     @property
-    def length(self):
+    def length(self) -> int:
         return len(self.position)
 
-    def grow(self):
+    def grow(self) -> None:
         self.position.insert(0, self._last_pos)
 
     def move_up(self) -> None:

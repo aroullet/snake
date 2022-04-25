@@ -1,5 +1,5 @@
 from enum import Enum, auto
-from point import Point
+from src.point import Point
 
 
 class Directions(Enum):

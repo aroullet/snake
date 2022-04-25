@@ -1,4 +1,4 @@
-from game import SnakeGame
+from src.game import SnakeGame
 
 
 def main() -> None:

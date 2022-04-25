@@ -4,11 +4,11 @@ import pygame
 from pygame.locals import *
 
 from config import read_config
-from snake import Snake
-from point import Point
-from gui import GUI
+from src.snake import Snake
+from src.point import Point
+from src.gui import GUI
 
-cfg = read_config(os.path.join(os.path.dirname(__file__), 'config.json'))
+cfg = read_config(os.path.join(os.path.dirname(__file__), '../config.json'))
 
 
 class SnakeGame:

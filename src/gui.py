@@ -1,5 +1,5 @@
 import pygame
-from point import Point
+from src.point import Point
 
 
 class Square(pygame.sprite.Sprite):

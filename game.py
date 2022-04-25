@@ -14,8 +14,9 @@ cfg = read_config('./config.json')
 class SnakeGame:
 
     def __init__(self):
-        self.snake = Snake(initial_pos=[Point(i, 20) for i in range(10)])
+        self.snake = Snake()
         self.fruit = SnakeGame.random_fruit()
+        self.score = 0
 
         self.gui = GUI(width=cfg.width, height=cfg.height, num_squares=self.snake.length, square_size=cfg.square_size)
         self.running = True
@@ -24,8 +25,9 @@ class SnakeGame:
         while self.running:
             self.gui.screen.fill((0, 0, 0))  # Clear screen
             self.check_events()
-            self.gui.draw(self.snake.position, self.fruit)
             self.snake.update_position()
+
+            self.gui.draw(self.snake.position, self.fruit, self.score)
             self.check_out_of_bounds()
             self.check_collision()
             self.check_fruit()
@@ -40,6 +42,7 @@ class SnakeGame:
             self.snake.grow()
             self.fruit = SnakeGame.random_fruit()
             self.gui.add_new_square()
+            self.score += 1
 
     def check_out_of_bounds(self):
         for point in self.snake.position:

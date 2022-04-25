@@ -11,7 +11,7 @@ class Directions(Enum):
 
 class Snake:
 
-    def __init__(self, initial_pos: list[Point]):
+    def __init__(self, initial_pos: list[Point] = [Point(i, 20) for i in range(10)]):
         self.position = initial_pos
         self._direction = Directions.RIGHT
         self.last_pos = None

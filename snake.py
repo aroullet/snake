@@ -14,7 +14,7 @@ class Snake:
     def __init__(self, initial_pos: list[Point] = [Point(i, 20) for i in range(10)]):
         self.position = initial_pos
         self._direction = Directions.RIGHT
-        self.last_pos = None
+        self._last_pos = None
 
     def __str__(self):
         return f'{self.position}'
@@ -23,7 +23,7 @@ class Snake:
         """
         Iterates over position array from tail to head, setting position of block i to that of block i+1
         """
-        self.last_pos = self.position[0]
+        self._last_pos = self.position[0]
         for i in range(self.length-1):
             self.position[i] = self.position[i+1]
         self._update_head()
@@ -52,7 +52,7 @@ class Snake:
         return len(self.position)
 
     def grow(self):
-        self.position.insert(0, self.last_pos)
+        self.position.insert(0, self._last_pos)
 
     def move_up(self) -> None:
         if self._direction != Directions.DOWN:
@@ -69,15 +69,3 @@ class Snake:
     def move_right(self) -> None:
         if self._direction != Directions.LEFT:
             self._direction = Directions.RIGHT
-
-
-if __name__ == '__main__':
-
-    pos = [Point(0, -1), Point(0, 0), Point(0, 1)]
-    snake = Snake(pos)
-    print(snake)
-    snake.update_position()
-    print(snake)
-    snake.move_left()
-    snake.update_position()
-    print(snake)

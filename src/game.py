@@ -20,6 +20,7 @@ class SnakeGame:
 
         self.gui = GUI(width=cfg.width, height=cfg.height, num_squares=self.snake.length, square_size=cfg.square_size)
         self.running = True
+        self.paused = False
         self.clock = pygame.time.Clock()
 
     def run(self) -> None:
@@ -40,6 +41,12 @@ class SnakeGame:
         pygame.quit()
         quit(0)
 
+    def pause_game(self):
+        while self.paused:
+            for event in pygame.event.get():
+                if event.type == KEYDOWN and event.key == K_p:
+                    self.paused = False
+
     def _check_fruit(self) -> None:
         if self.snake.position[-1] == self.fruit:
             self.snake.grow()
@@ -58,7 +65,7 @@ class SnakeGame:
             print('You ran into a wall!')
 
     def _check_collision(self) -> None:
-        if len(set(self.snake.position)) < self.snake.length:  # _check for duplicate points in positions list
+        if len(set(self.snake.position)) < self.snake.length:  # check for duplicate points in positions list
             self.running = False
             print('You hit yourself!')
 
@@ -78,6 +85,10 @@ class SnakeGame:
 
                 elif event.key == K_RIGHT:
                     self.snake.move_right()
+
+                elif event.key == K_p:
+                    self.paused = True
+                    self.pause_game()
 
             elif event.type == QUIT:
                 self.running = False

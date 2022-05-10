@@ -1,5 +1,6 @@
 import os
 from random import randint
+from collections import deque
 import pygame
 from pygame.locals import *
 
@@ -14,7 +15,8 @@ cfg = read_config(os.path.join(os.path.dirname(__file__), '../config.json'))
 class SnakeGame:
 
     def __init__(self):
-        self.snake = Snake()
+        # Center the snake vertically when the game starts, initializes it with 5 squares
+        self.snake = Snake(initial_pos=deque([Point(i, cfg.height//(2*cfg.square_size)) for i in range(5, 0, -1)]))
         self.fruit = SnakeGame._random_fruit()
         self.score = 0
 
@@ -55,7 +57,7 @@ class SnakeGame:
             self.score += 1
 
     def _check_out_of_bounds(self) -> None:
-        head = self.snake.position[-1]
+        head = self.snake.position[0]
         if not (0 < head.x < cfg.width/cfg.square_size):
             self.running = False
             print('You ran into a wall!')

@@ -2,7 +2,7 @@ from dataclasses import dataclass
 import json
 
 
-@dataclass
+@dataclass(frozen=True)
 class GameConfig:
     width: int
     height: int

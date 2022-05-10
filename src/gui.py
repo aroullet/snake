@@ -1,5 +1,6 @@
 import pygame
 from src.point import Point
+from collections import deque
 
 
 class Square(pygame.sprite.Sprite):
@@ -24,7 +25,7 @@ class GUI:
         self._squares = [Square(self._square_size) for i in range(num_squares)]
         self._fruit_square = Square(self._square_size)
 
-    def draw(self, positions: list[Point], fruit: Point, count: int) -> None:
+    def draw(self, positions: deque[Point], fruit: Point, count: int) -> None:
         for i, square in enumerate(self._squares):
             self.screen.blit(square.surf, (positions[i].x*self._square_size, positions[i].y*self._square_size))
         self.screen.blit(self._fruit_square.surf, (fruit.x*self._square_size, fruit.y*self._square_size))
